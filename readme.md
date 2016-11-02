@@ -9,11 +9,12 @@ Another cool thing is that, you can track multiple questions at a time, you will
 Also when you click the icon, a popup notification will show all the tracked tags and questions. Cool eh??
 
 
-Key Features:
-1. Track multiple tags.
-2. Track multiple questions.
-3. Pull featured questions.
-4. Notifications on/off.
-5. Limit Notifications.
-6. Set pull content interval.
-7. Separate icons for questions, tags, featured questions and answers.
+###Key Features:
+
+    1. Track multiple tags.
+    2. Track multiple questions.
+    3. Pull featured questions.
+    4. Notifications on/off.
+    5. Limit Notifications.
+    6. Set pull content interval.
+    7. Separate icons for questions, tags, featured questions and answers.
