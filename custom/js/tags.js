@@ -15,22 +15,7 @@ function generateNotificationTags(changes) {
                             if (typeof notNewIndexDict[nKey] == 'undefined') {
                                 notNewIndexDict[nKey] = [nIndex];
                             } else {
-                            //     var nowNewIndexDictList = notNewIndexDict[nKey];
-                            //     nowNewIndexDictList.push(nIndex);
-                            //     notNewIndexDict[nKey] = nowNewIndexDictList;
-                            // };
-
-                                console.log(nKey);
-                                console.log('----------')
-                                console.log(notNewIndexDict)
-
-                                console.log('----------')
-                                var nowNewIndexDictList = notNewIndexDict[nKey];
-                                console.log(nowNewIndexDictList);
-                                
-                                console.log('----------')
-                                nowNewIndexDictList.push(nIndex);
-                                notNewIndexDict[nKey] = nowNewIndexDictList;
+                                notNewIndexDict[nKey].push(nIndex);
                                 };
                         };
                     })

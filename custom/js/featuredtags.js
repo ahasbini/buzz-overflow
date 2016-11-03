@@ -13,9 +13,7 @@ function generateNotificationFTags(changes) {
                             if (typeof notNewIndexDict[nKey] == 'undefined') {
                                 notNewIndexDict[nKey] = [nIndex];
                             } else {
-                                var nowNewIndexDictList = notNewIndexDict[nKey];
-                                nowNewIndexDictList.push(nIndex);
-                                notNewIndexDict[nKey] = nowNewIndexDictList;
+                                notNewIndexDict[nKey].push(nIndex);
                             };
 
                         };

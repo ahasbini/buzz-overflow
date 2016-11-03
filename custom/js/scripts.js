@@ -30,7 +30,6 @@ function createAlarm(alarmName) {
     chrome.storage.local.get("yesNotification", function(items) {
         if (items.yesNotification == true) {
             chrome.storage.local.get("rssFeedTime", function(item) {
-                console.log(item.rssFeedTime);
                 var periodInMinutez = parseInt(item.rssFeedTime);
                 if (periodInMinutez > 0) {
                     var alarmObj = {
