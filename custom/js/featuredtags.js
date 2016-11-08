@@ -1,34 +1,21 @@
 function generateNotificationFTags(changes) {
-    var notNewIndexDict = {};
     var newValues = changes.allFTagFeeds.newValue;
     var oldValues = changes.allFTagFeeds.oldValue;
 
-    $.each(newValues, function(nKey, nValue) {
-        $.each(oldValues, function(oKey, oValue) {
-            if (nKey == oKey) {
+    $.each(oldValues, function(key, value) {
+        if (key in newValues) {
+            $.each(value, function(idx, val) {
+                $.each(newValues[key], function(idxn, valn) {
+                    if (typeof valn == "undefined") {
+                        newValues[key].splice(idxn, 1);
+                    } else if (val[1] == valn[1]) {
+                        newValues[key].splice(idxn, 1);
+                    };
+                });
+            })
+        }
+    })
 
-                $.each(nValue, function(nIndex, nnValue) {
-                    $.each(oValue, function(oIndex, ooValue) {
-                        if (nnValue[1] == ooValue[1]) {
-                            if (typeof notNewIndexDict[nKey] == 'undefined') {
-                                notNewIndexDict[nKey] = [nIndex];
-                            } else {
-                                notNewIndexDict[nKey].push(nIndex);
-                            };
-
-                        };
-                    })
-                })
-            }
-        });
-    });
-
-    $.each(notNewIndexDict, function(key, value) {
-        $.each(value, function(idx, val) {
-            newValues[key] = newValues[key].splice(val, 1);
-        });
-
-    });
     var updateCount = 0;
     $.each(newValues, function(key, value) {
         createFTagNotification(key, value);
@@ -41,12 +28,13 @@ function createFTagNotification(tag, value) {
     chrome.storage.local.get('notificationLimit', function(item) {
         var notificationLimit = parseInt(item.notificationLimit, "10");
         $.each(value, function(index, val) {
-            var nTitle = "Featrued Question by " + val[2] + " in Tag " + tag;
-            createNotification(feedType[2], nTitle, val[0], val[1]);
-            if (notificationLimit > 0) {
-
-                return index + 1 > notificationLimit;
+            if (notificationLimit == -1 || (notificationLimit > 0 && notificationLimit > index)) {
+                var nTitle = "Featrued Question by " + val[2] + " in Tag " + capitalizeFirstLetter(tag);
+                createNotification(feedType[2], nTitle, val[0], val[1]);
+            } else {
+                return false
             };
+
         })
     });
 

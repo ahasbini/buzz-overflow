@@ -6,18 +6,7 @@ var updateBadgeDict = {
 }
 
 chrome.runtime.onInstalled.addListener(function() {
-    chrome.storage.local.set({ "rssFeedTime": 10 });
-    chrome.storage.local.set({ "notificationTime": 10 });
-    chrome.storage.local.set({ "notificationLimit": -1 });
-    chrome.storage.local.set({ "yesNotification": true });
-    chrome.storage.local.set({ "rssQuestions": [] });
-    chrome.storage.local.set({ "rssTags": [] });
-    chrome.storage.local.set({ "allFTagFeeds": {} });
-    chrome.storage.local.set({ "allTagFeeds": {} });
-    chrome.storage.local.set({ "allQusFeeds": {} });
-    chrome.storage.local.set({ "yesFeaturedQn": false });
-    chrome.storage.local.set({ "yesNewestQn": true });
-
+    resetEverything();
 });
 
 chrome.alarms.onAlarm.addListener(function(alarm) {

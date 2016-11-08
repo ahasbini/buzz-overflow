@@ -1,3 +1,17 @@
+function resetEverything() {
+    chrome.storage.local.set({ "rssFeedTime": 10 });
+    chrome.storage.local.set({ "notificationTime": 10 });
+    chrome.storage.local.set({ "notificationLimit": -1 });
+    chrome.storage.local.set({ "yesNotification": true });
+    chrome.storage.local.set({ "rssQuestions": [] });
+    chrome.storage.local.set({ "rssTags": [] });
+    chrome.storage.local.set({ "allFTagFeeds": {} });
+    chrome.storage.local.set({ "allTagFeeds": {} });
+    chrome.storage.local.set({ "allQusFeeds": {} });
+    chrome.storage.local.set({ "yesFeaturedQn": false });
+    chrome.storage.local.set({ "yesNewestQn": true });
+}
+
 function callAjax(rssUrl) {
     var responseList = [];
     try {
@@ -33,6 +47,7 @@ function createAlarm(alarmName) {
                 var periodInMinutez = parseInt(item.rssFeedTime);
                 if (periodInMinutez > 0) {
                     var alarmObj = {
+                        delayInMinutes: 1,
                         periodInMinutes: periodInMinutez
                     }
                     chrome.alarms.create(alarmName, alarmObj);
@@ -86,7 +101,7 @@ function intervalUpdatedNoti(changes) {
         var opt = {
             type: "basic",
             title: "Pull Interval Time Updated",
-            message: "Pull Iterval Time have been updated to"+ changes.rssFeedTime.newValue.toString(),
+            message: "Pull Iterval Time have been updated to "+ changes.rssFeedTime.newValue.toString() + " minute(s)",
             iconUrl: "images/setup_icon.png"
         };
 
@@ -130,3 +145,7 @@ function isUrl(val) {
     var urlregex = /^(https?|ftp):\/\/([a-zA-Z0-9.-]+(:[a-zA-Z0-9.&%$-]+)*@)*((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9][0-9]?)(\.(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])){3}|([a-zA-Z0-9-]+\.)*[a-zA-Z0-9-]+\.(com|edu|gov|int|mil|net|org|biz|arpa|info|name|pro|aero|coop|museum|[a-zA-Z]{2}))(:[0-9]+)*(\/($|[a-zA-Z0-9.,?'\\+&%$#=~_-]+))*$/;
     return urlregex.test(val);
 };
+
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
