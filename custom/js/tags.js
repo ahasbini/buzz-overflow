@@ -63,6 +63,12 @@ function callTagUrls(rssTags) {
 };
 
 var tagUrlGenerator = function(tag) {
+    $.each(normalizableChars, function( k, v ) {
+        if (tag.indexOf(k) > 0) {
+            tag=tag.replace(k, v);
+        }
+        
+    });
     return "http://stackoverflow.com/feeds/tag?tagnames=" + tag + "&sort=newest"
 };
 
@@ -120,3 +126,39 @@ function processTags(changes) {
     callFTagNotiGen(changes);
 
 };
+
+var normalizableChars = {
+    '%': '%25',
+    '#': '%23',
+    '+': '%2B',
+    ' ': '%20',
+    '$': '%24',
+    '&': '%26',
+    '`': '%60',
+    ':': '%3A',
+    '<': '%3C',
+    '>': '%3E',
+    '[': '%5B',
+    ']': '%5D',
+    '{': '%7B',
+    '}': '%7D',
+    '“': '%22',
+    '@': '%40',
+    '/': '%2F',
+    ';': '%3B',
+    '=': '%3D',
+    '?': '%3F',
+    '^': '%5E',
+    '|': '%7C',
+    '~': '%7E',
+    "‘": '%27',
+    ',': '%2C' 
+}
+
+function fTagNormalize(tag){
+    $.each(normalizableChars, function( k, v ) {
+        tag.replace(/k/g, v);
+    });
+    return tag;
+
+}
