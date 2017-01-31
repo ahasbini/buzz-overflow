@@ -65,7 +65,7 @@ function callTagUrls(rssTags) {
 var tagUrlGenerator = function(tag) {
     $.each(normalizableChars, function( k, v ) {
         if (tag.indexOf(k) > 0) {
-            tag=tag.replace(k, v);
+            tag=tag.split(k).join(v);
         }
         
     });
@@ -153,12 +153,4 @@ var normalizableChars = {
     '~': '%7E',
     "‘": '%27',
     ',': '%2C' 
-}
-
-function fTagNormalize(tag){
-    $.each(normalizableChars, function( k, v ) {
-        tag.replace(/k/g, v);
-    });
-    return tag;
-
 }

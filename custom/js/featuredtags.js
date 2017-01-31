@@ -61,7 +61,7 @@ function callFTagUrls(rssTags) {
 var fTagUrlGenerator = function(tag) {
     $.each(normalizableChars, function( k, v ) {
         if (tag.indexOf(k) > 0) {
-            tag=tag.replace(/k/g, v);
+            tag.split(k).join(v);
         }
         
     });
