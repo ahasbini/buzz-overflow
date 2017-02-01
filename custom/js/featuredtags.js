@@ -61,7 +61,7 @@ function callFTagUrls(rssTags) {
 var fTagUrlGenerator = function(tag) {
     $.each(normalizableChars, function( k, v ) {
         if (tag.indexOf(k) > 0) {
-            tag.split(k).join(v);
+            tag=tag.split(k).join(v);
         }
         
     });
@@ -98,7 +98,6 @@ var normalizableChars = {
 
 function callFTagNotiGen(changes) {
     if (changes.hasOwnProperty("allFTagFeeds")) {
-
         generateNotificationFTags(changes);
     } else {
         return;
